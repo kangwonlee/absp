@@ -1,2 +1,3 @@
-# absp
-Automate the Boring Stuff with Python
+# Automate the Boring Stuff with Python
+
+* From https://nostarch.com/automatestuff#updates
