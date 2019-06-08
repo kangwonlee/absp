@@ -3,12 +3,12 @@
 # passed to it as a string.
 
 # Preset values:
+from twilio.rest import TwilioRestClient
 accountSID = 'ACxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
-authToken  = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
+authToken = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
 myNumber = '+15559998888'
 twilioNumber = '+15552225678'
 
-from twilio.rest import TwilioRestClient
 
 def textmyself(message):
     twilioCli = TwilioRestClient(accountSID, authToken)

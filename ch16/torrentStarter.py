@@ -2,11 +2,21 @@
 # Checks for instructions via email and runs them.
 # So far, this program checks for BitTorrent "magnet" links and launches the torrent program for them.
 
-import smtplib, imapclient, pyzmail, logging, traceback, time, subprocess
-logging.basicConfig(filename='torrentStarterLog.txt', level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
+import logging
+import smtplib
+import subprocess
+import time
+import traceback
+
+import imapclient
+import pyzmail
+
+
+logging.basicConfig(filename='torrentStarterLog.txt', level=logging.DEBUG,
+                    format='%(asctime)s - %(levelname)s - %(message)s')
 
 # Configure the program by setting some variables.
-MY_EMAIL = 'asweigart@gmail.com' # bot should only respond to me
+MY_EMAIL = 'asweigart@gmail.com'  # bot should only respond to me
 BOT_EMAIL = 'imaptest@coffeeghost.net'
 BOT_EMAIL_PASSWORD = '7|)6S1JS6>euu8p/nTlf'
 IMAP_SERVER = 'mail.coffeeghost.net'
@@ -19,7 +29,7 @@ assert BOT_EMAIL != MY_EMAIL, "Give the bot it's own email address."
 
 def getInstructionEmails():
     # Log in to the email imapCli.
-    logging.debug('Connecting to IMAP server at %s...' % (IMAP_SERVER))
+    logging.debug(f'Connecting to IMAP server at {IMAP_SERVER}...')
     imapCli = imapclient.IMAPClient(IMAP_SERVER, ssl=True)
     imapCli.login(BOT_EMAIL, BOT_EMAIL_PASSWORD)
     imapCli.select_folder('INBOX')
@@ -59,15 +69,18 @@ def parseInstructionEmail(instruction):
     lines = instruction.split('\n')
     for line in lines:
         if line.startswith('magnet:?'):
-            subprocess.Popen(TORRENT_PROGRAM + ' ' + line) # launch the bittorrent program
+            # launch the bittorrent program
+            subprocess.Popen(TORRENT_PROGRAM + ' ' + line)
             responseBody += 'Downloading magnet link.\n'
 
     # Email the response body to confirm the bot carried out this instruction.
-    logging.debug('Connecting to SMTP server at %s to send confirmation email...' % (SMTP_SERVER))
-    #smtpCli = smtplib.SMTP(SMTP_SERVER, SMTP_PORT)     # uncomment one or the other as needed.
-    smtpCli = smtplib.SMTP_SSL(SMTP_SERVER, SMTP_PORT) # uncomment one or the other as needed.
+    logging.debug(
+        f'Connecting to SMTP server at {SMTP_SERVER} to send confirmation email...')
+    # smtpCli = smtplib.SMTP(SMTP_SERVER, SMTP_PORT)     # uncomment one or the other as needed.
+    # uncomment one or the other as needed.
+    smtpCli = smtplib.SMTP_SSL(SMTP_SERVER, SMTP_PORT)
     smtpCli.ehlo()
-    #smtpCli.starttls() # comment this out if using SMTP_SSL
+    # smtpCli.starttls() # comment this out if using SMTP_SSL
     smtpCli.login(BOT_EMAIL, BOT_EMAIL_PASSWORD)
     logging.debug('Connected.')
     smtpCli.sendmail(BOT_EMAIL, MY_EMAIL, responseBody)

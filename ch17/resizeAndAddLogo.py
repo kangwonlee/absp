@@ -16,7 +16,7 @@ os.makedirs('withLogo', exist_ok=True)
 for filename in os.listdir('.'):
     if not (filename.endswith('.png') or filename.endswith('.jpg')) \
        or filename == LOGO_FILENAME:
-        continue # skip non-image files and the logo file itself
+        continue  # skip non-image files and the logo file itself
 
     im = Image.open(filename)
     width, height = im.size
@@ -32,11 +32,11 @@ for filename in os.listdir('.'):
             height = SQUARE_FIT_SIZE
 
         # Resize the image.
-        print('Resizing %s...' % (filename))
+        print(f'Resizing {filename}...')
         im = im.resize((width, height))
 
     # Add logo.
-    print('Adding logo to %s...' % (filename))
+    print(f'Adding logo to {filename}...')
     im.paste(logoIm, (width - logoWidth, height - logoHeight), logoIm)
 
     # Save changes.

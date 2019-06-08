@@ -16,6 +16,7 @@ def isPhoneNumber(text):
             return False  # does not have last 4 digits
     return True  # "text" is a phone number!
 
+
 print('415-555-4242 is a phone number:')
 print(isPhoneNumber('415-555-4242'))
 print('Moshi moshi is a phone number:')
