@@ -27,10 +27,14 @@ smtpObj.login('my_email_address@gmail.com', sys.argv[1])
 
 # Send out reminder emails.
 for name, email in unpaidMembers.items():
-    body = 'Subject: %s dues unpaid.\nDear %s,\nRecords show that you have not paid dues for %s. Please make this payment as soon as possible. Thank you!' % (latestMonth, name, latestMonth)
-    print('Sending email to %s...' % email)
+    body = (
+        f'Subject: {latestMonth} dues unpaid.\n'
+        f'Dear {name},\n'
+        f'Records show that you have not paid dues for {latestMonth}. Please make this payment as soon as possible. Thank you!'
+    )
+    print(f'Sending email to {email}...')
     sendmailStatus = smtpObj.sendmail('my_email_address@gmail.com', email, body)
 
     if sendmailStatus != {}:
-        print('There was a problem sending email to %s: %s' % (email, sendmailStatus))
+        print(f'There was a problem sending email to {email}: {sendmailStatus}')
 smtpObj.quit()
