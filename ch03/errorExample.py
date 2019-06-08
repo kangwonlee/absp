@@ -3,7 +3,7 @@ def spam():
 
 
 def bacon():
-    raise Exception('This is the error message.')
+    raise Exception("This is the error message.")
 
 
 spam()

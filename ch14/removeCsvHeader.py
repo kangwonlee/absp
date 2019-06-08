@@ -5,14 +5,14 @@
 import csv
 import os
 
-os.makedirs('headerRemoved', exist_ok=True)
+os.makedirs("headerRemoved", exist_ok=True)
 
 # Loop through every file in the current working directory.
-for csvFilename in os.listdir('.'):
-    if not csvFilename.endswith('.csv'):
+for csvFilename in os.listdir("."):
+    if not csvFilename.endswith(".csv"):
         continue  # skip non-csv files
 
-    print('Removing header from ' + csvFilename + '...')
+    print("Removing header from " + csvFilename + "...")
 
     # Read the CSV file in (skipping first row).
     csvRows = []
@@ -25,8 +25,7 @@ for csvFilename in os.listdir('.'):
     csvFileObj.close()
 
     # Write out the CSV file.
-    csvFileObj = open(os.path.join(
-        'headerRemoved', csvFilename), 'w', newline='')
+    csvFileObj = open(os.path.join("headerRemoved", csvFilename), "w", newline="")
     csvWriter = csv.writer(csvFileObj)
     for row in csvRows:
         csvWriter.writerow(row)

@@ -8,4 +8,4 @@ def getDocxText(filename):
     fullText = []
     for para in doc.paragraphs:
         fullText.append(para.text)
-    return '\n\n'.join(fullText)
+    return "\n\n".join(fullText)

@@ -6,16 +6,18 @@ import os
 from PIL import Image
 
 SQUARE_FIT_SIZE = 300
-LOGO_FILENAME = 'catlogo.png'
+LOGO_FILENAME = "catlogo.png"
 
 logoIm = Image.open(LOGO_FILENAME)
 logoWidth, logoHeight = logoIm.size
 
-os.makedirs('withLogo', exist_ok=True)
+os.makedirs("withLogo", exist_ok=True)
 # Loop over all files in the working directory.
-for filename in os.listdir('.'):
-    if not (filename.endswith('.png') or filename.endswith('.jpg')) \
-       or filename == LOGO_FILENAME:
+for filename in os.listdir("."):
+    if (
+        not (filename.endswith(".png") or filename.endswith(".jpg"))
+        or filename == LOGO_FILENAME
+    ):
         continue  # skip non-image files and the logo file itself
 
     im = Image.open(filename)
@@ -32,12 +34,12 @@ for filename in os.listdir('.'):
             height = SQUARE_FIT_SIZE
 
         # Resize the image.
-        print(f'Resizing {filename}...')
+        print(f"Resizing {filename}...")
         im = im.resize((width, height))
 
     # Add logo.
-    print(f'Adding logo to {filename}...')
+    print(f"Adding logo to {filename}...")
     im.paste(logoIm, (width - logoWidth, height - logoHeight), logoIm)
 
     # Save changes.
-    im.save(os.path.join('withLogo', filename))
+    im.save(os.path.join("withLogo", filename))

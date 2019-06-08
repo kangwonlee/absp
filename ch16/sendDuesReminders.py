@@ -6,8 +6,8 @@ import smtplib
 import sys
 
 # Open the spreadsheet and get the latest dues status.
-wb = openpyxl.load_workbook('duesRecords.xlsx')
-sheet = wb.get_sheet_by_name('Sheet1')
+wb = openpyxl.load_workbook("duesRecords.xlsx")
+sheet = wb.get_sheet_by_name("Sheet1")
 
 lastCol = sheet.get_highest_column()
 latestMonth = sheet.cell(row=1, column=lastCol).value
@@ -16,29 +16,27 @@ unpaidMembers = {}
 # Check each member's payment status
 for r in range(2, sheet.get_highest_row() + 1):
     payment = sheet.cell(row=r, column=lastCol).value
-    if payment != 'paid':
+    if payment != "paid":
         name = sheet.cell(row=r, column=1).value
         email = sheet.cell(row=r, column=2).value
         unpaidMembers[name] = email
 
 # Log in to email account.
-smtpObj = smtplib.SMTP('smtp.gmail.com', 587)
+smtpObj = smtplib.SMTP("smtp.gmail.com", 587)
 smtpObj.ehlo()
 smtpObj.starttls()
-smtpObj.login('my_email_address@gmail.com', sys.argv[1])
+smtpObj.login("my_email_address@gmail.com", sys.argv[1])
 
 # Send out reminder emails.
 for name, email in unpaidMembers.items():
     body = (
-        f'Subject: {latestMonth} dues unpaid.\n'
-        f'Dear {name},\n'
-        f'Records show that you have not paid dues for {latestMonth}. Please make this payment as soon as possible. Thank you!'
+        f"Subject: {latestMonth} dues unpaid.\n"
+        f"Dear {name},\n"
+        f"Records show that you have not paid dues for {latestMonth}. Please make this payment as soon as possible. Thank you!"
     )
-    print(f'Sending email to {email}...')
-    sendmailStatus = smtpObj.sendmail(
-        'my_email_address@gmail.com', email, body)
+    print(f"Sending email to {email}...")
+    sendmailStatus = smtpObj.sendmail("my_email_address@gmail.com", email, body)
 
     if sendmailStatus != {}:
-        print(
-            f'There was a problem sending email to {email}: {sendmailStatus}')
+        print(f"There was a problem sending email to {email}: {sendmailStatus}")
 smtpObj.quit()

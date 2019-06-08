@@ -1,10 +1,10 @@
 def spam():
     global eggs  # this is the global
-    eggs = 'spam'
+    eggs = "spam"
 
 
 def bacon():
-    eggs = 'bacon'  # this is a local
+    eggs = "bacon"  # this is a local
 
 
 def ham():
