@@ -1,0 +1,9 @@
+pyperclip
+PyPDF2
+imapclient
+pyzmail
+pyautogui
+requests==2.21.0
+beautifulsoup4==4.6.3
+openpyxl==2.5.12
+python-docx
