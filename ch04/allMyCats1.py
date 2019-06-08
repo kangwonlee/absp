@@ -11,4 +11,5 @@ catName5 = input()
 print('Enter the name of cat 6:')
 catName6 = input()
 print('The cat names are:')
-print(catName1 + ' ' + catName2 + ' ' + catName3 + ' ' + catName4 + ' ' + catName5 + ' ' + catName6)
+print(catName1 + ' ' + catName2 + ' ' + catName3 +
+      ' ' + catName4 + ' ' + catName5 + ' ' + catName6)

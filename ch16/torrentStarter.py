@@ -12,10 +12,11 @@ import imapclient
 import pyzmail
 
 
-logging.basicConfig(filename='torrentStarterLog.txt', level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
+logging.basicConfig(filename='torrentStarterLog.txt', level=logging.DEBUG,
+                    format='%(asctime)s - %(levelname)s - %(message)s')
 
 # Configure the program by setting some variables.
-MY_EMAIL = 'asweigart@gmail.com' # bot should only respond to me
+MY_EMAIL = 'asweigart@gmail.com'  # bot should only respond to me
 BOT_EMAIL = 'imaptest@coffeeghost.net'
 BOT_EMAIL_PASSWORD = '7|)6S1JS6>euu8p/nTlf'
 IMAP_SERVER = 'mail.coffeeghost.net'
@@ -68,15 +69,18 @@ def parseInstructionEmail(instruction):
     lines = instruction.split('\n')
     for line in lines:
         if line.startswith('magnet:?'):
-            subprocess.Popen(TORRENT_PROGRAM + ' ' + line) # launch the bittorrent program
+            # launch the bittorrent program
+            subprocess.Popen(TORRENT_PROGRAM + ' ' + line)
             responseBody += 'Downloading magnet link.\n'
 
     # Email the response body to confirm the bot carried out this instruction.
-    logging.debug(f'Connecting to SMTP server at {SMTP_SERVER} to send confirmation email...')
-    #smtpCli = smtplib.SMTP(SMTP_SERVER, SMTP_PORT)     # uncomment one or the other as needed.
-    smtpCli = smtplib.SMTP_SSL(SMTP_SERVER, SMTP_PORT) # uncomment one or the other as needed.
+    logging.debug(
+        f'Connecting to SMTP server at {SMTP_SERVER} to send confirmation email...')
+    # smtpCli = smtplib.SMTP(SMTP_SERVER, SMTP_PORT)     # uncomment one or the other as needed.
+    # uncomment one or the other as needed.
+    smtpCli = smtplib.SMTP_SSL(SMTP_SERVER, SMTP_PORT)
     smtpCli.ehlo()
-    #smtpCli.starttls() # comment this out if using SMTP_SSL
+    # smtpCli.starttls() # comment this out if using SMTP_SSL
     smtpCli.login(BOT_EMAIL, BOT_EMAIL_PASSWORD)
     logging.debug('Connected.')
     smtpCli.sendmail(BOT_EMAIL, MY_EMAIL, responseBody)

@@ -2,6 +2,7 @@
 
 import docx
 
+
 def getDocxText(filename):
     doc = docx.Document(filename)
     fullText = []

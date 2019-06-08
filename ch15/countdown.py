@@ -1,7 +1,8 @@
 #! python3
 # countdown.py - A simple countdown script.
 
-import time, subprocess
+import time
+import subprocess
 
 timeLeft = 60
 while timeLeft > 0:
@@ -10,4 +11,4 @@ while timeLeft > 0:
     timeLeft = timeLeft - 1
 
 # At the end of the countdown, play a sound file.
-subprocess.Popen(['start','alarm.wav'], shell=True)
+subprocess.Popen(['start', 'alarm.wav'], shell=True)
