@@ -7,8 +7,8 @@ os.makedirs('xkcd', exist_ok=True) # store comics in ./xkcd
 def downloadXkcd(startComic, endComic):
     for urlNumber in range(startComic, endComic):
         # Download the page.
-        print('Downloading page http://xkcd.com/%s...' % (urlNumber))
-        res = requests.get('http://xkcd.com/%s' % (urlNumber))
+        print(f'Downloading page http://xkcd.com/{urlNumber}...')
+        res = requests.get(f'http://xkcd.com/{urlNumber}')
         res.raise_for_status()
 
         soup = bs4.BeautifulSoup(res.text)
@@ -20,7 +20,7 @@ def downloadXkcd(startComic, endComic):
         else:
             comicUrl = comicElem[0].get('src')
             # Download the image.
-            print('Downloading image %s...' % (comicUrl))
+            print(f'Downloading image {comicUrl}...')
             res = requests.get(comicUrl)
             res.raise_for_status()
 
