@@ -1,7 +1,9 @@
 #! python3
 # formFiller.py - Automatically fills in the form.
 
-import pyautogui, time
+import time
+
+import pyautogui
 
 # Set these to the correct coordinates for your particular computer.
 nameField = (648, 319)
@@ -10,9 +12,12 @@ submitButtonColor = (75, 141, 249)
 submitAnotherLink = (760, 224)
 
 formData = [{'name': 'Alice', 'fear': 'eavesdroppers', 'source': 'wand', 'robocop': 4, 'comments': 'Tell Bob I said hi.'},
-            {'name': 'Bob', 'fear': 'bees', 'source': 'amulet', 'robocop': 4, 'comments': 'n/a'},
-            {'name': 'Carol', 'fear': 'puppets', 'source': 'crystal ball', 'robocop': 1, 'comments': 'Please take the puppets out of the break room.'},
-            {'name': 'Alex Murphy', 'fear': 'ED-209', 'source': 'money', 'robocop': 5, 'comments': 'Protect the innocent. Serve the public trust. Uphold the law.'},
+            {'name': 'Bob', 'fear': 'bees', 'source': 'amulet',
+                'robocop': 4, 'comments': 'n/a'},
+            {'name': 'Carol', 'fear': 'puppets', 'source': 'crystal ball', 'robocop': 1,
+                'comments': 'Please take the puppets out of the break room.'},
+            {'name': 'Alex Murphy', 'fear': 'ED-209', 'source': 'money', 'robocop': 5,
+                'comments': 'Protect the innocent. Serve the public trust. Uphold the law.'},
             ]
 
 pyautogui.PAUSE = 0.5
@@ -26,7 +31,7 @@ for person in formData:
     while not pyautogui.pixelMatchesColor(submitButton[0], submitButton[1], submitButtonColor):
         time.sleep(0.5)
 
-    print('Entering %s info...' % (person['name']))
+    print(f"Entering {person['name']} info...")
     pyautogui.click(nameField[0], nameField[1])
 
     # Fill out the Name field.
