@@ -3,14 +3,15 @@
 
 import os
 import threading
+import urllib.parse
 
 import bs4
 import requests
 
+
 os.makedirs('xkcd', exist_ok=True) # store comics in ./xkcd
 
 def downloadXkcd(startComic, endComic):
-
     for urlNumber in range(startComic, endComic):
         # Download the page.
         print(f'Downloading page http://xkcd.com/{urlNumber}...')
