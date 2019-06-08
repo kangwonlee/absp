@@ -1,10 +1,16 @@
 #! python3
 # multidownloadXkcd.py - Downloads XKCD comics using multiple threads.
 
-import requests, os, bs4, threading
+import os
+import threading
+
+import bs4
+import requests
+
 os.makedirs('xkcd', exist_ok=True) # store comics in ./xkcd
 
 def downloadXkcd(startComic, endComic):
+
     for urlNumber in range(startComic, endComic):
         # Download the page.
         print(f'Downloading page http://xkcd.com/{urlNumber}...')
